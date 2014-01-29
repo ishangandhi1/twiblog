@@ -7,6 +7,10 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
+end
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
