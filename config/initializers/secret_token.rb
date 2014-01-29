@@ -9,4 +9,18 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Twiblog::Application.config.secret_key_base = 'a10c80cd56bd0b3e104d6e12997892a23f07ee1156cde262f7384394d47ba7d5ea9aa6d57b60cdf14d39938dd0049a119ef6a1aa14f50b477acc6d0f88e5b700'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    File.read(token_file).chomp
+  else
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+
+end
+
+Twiblog::Application.config.secret_key_base = secure_token
